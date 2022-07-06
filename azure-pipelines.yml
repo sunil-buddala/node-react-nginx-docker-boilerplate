@@ -20,13 +20,12 @@ stages:
     pool:
       name: DKPool
     steps:
-    - task: AWSCLI@1
+    - task: AWSPowerShellModuleScript@1
       inputs:
         awsCredentials: 'DonateKartAWS'
         regionName: 'ap-south-1'
-        awsCommand: 'ecr'
-        awsSubCommand: 'get-login-password'
-        awsArguments: '--region ap-south-1'
+        scriptType: 'inline'
+        inlineScript: '(Get-ECRLoginCommand).Password | docker login --username AWS --password-stdin 308508746467.dkr.ecr.ap-south-1.amazonaws.com'
     - task: Docker@2
       displayName: Build docker image
       inputs:
