@@ -26,7 +26,7 @@ stages:
         regionName: 'ap-south-1'
         awsCommand: 'ecr'
         awsSubCommand: 'get-login-password'
-        awsArguments: '--region ap-south-1 | docker login --username AWS --password-stdin 308508746467.dkr.ecr.ap-south-1.amazonaws.com'
+        awsArguments: '--region ap-south-1'
     - task: Docker@2
       displayName: Build docker image
       inputs:
