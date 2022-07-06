@@ -17,8 +17,8 @@ stages:
   jobs:
   - job: Build
     displayName: Build
-    pool:
-      name: DKPool
+     pool:
+      vmImage: ubuntu-latest
     steps:
     - task: AWSPowerShellModuleScript@1
       inputs:
