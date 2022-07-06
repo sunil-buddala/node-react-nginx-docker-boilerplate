@@ -10,6 +10,8 @@ resources:
 
 variables:
   tag: '$(Build.BuildId)'
+  name: ECR_REPOSITORY_URL
+  value: $(AWS_ACCOUNT_ID).dkr.ecr.$(AWS_REGION).amazonaws.com/$(ECR_REPOSITORY_NAME)
 
 stages:
 - stage: Build
@@ -21,44 +23,26 @@ stages:
       vmImage: ubuntu-latest
     steps:
     - task: Docker@2
-      displayName: Build an image
+      displayName: Build docker image
       inputs:
-        command: build
-        dockerfile: '$(Build.SourcesDirectory)/api/Dockerfile'
+        repository: '308508746467.dkr.ecr.ap-south-1.amazonaws.com/test-api'
+        command: buildAndPush
+        Dockerfile: '$(Build.SourcesDirectory)/api/Dockerfile'
         tags: |
-          api
-    - task: ECRPushImage@1
-      inputs:
-        awsCredentials: 'DonateKartAWS'
-        regionName: 'ap-south-1'
-        imageSource: 'imagename'
-        sourceImageName: 'api'
-        repositoryName: '308508746467.dkr.ecr.ap-south-1.amazonaws.com/test-api'
+            $(tag)
     - task: Docker@2
-      displayName: Build an image
+      displayName: Build docker image
       inputs:
-        command: build
-        dockerfile: '$(Build.SourcesDirectory)/client/Dockerfile'
+        repository: '308508746467.dkr.ecr.ap-south-1.amazonaws.com/test-client'
+        command: buildAndPush
+        Dockerfile: '$(Build.SourcesDirectory)/client/Dockerfile'
         tags: |
-          client
-    - task: ECRPushImage@1
-      inputs:
-        awsCredentials: 'DonateKartAWS'
-        regionName: 'ap-south-1'
-        imageSource: 'imagename'
-        sourceImageName: 'client'
-        repositoryName: '308508746467.dkr.ecr.ap-south-1.amazonaws.com/test-client'
+            $(tag)
     - task: Docker@2
-      displayName: Build an image
+      displayName: Build docker image
       inputs:
-        command: build
-        dockerfile: '$(Build.SourcesDirectory)/nginx/Dockerfile'
+        repository: '308508746467.dkr.ecr.ap-south-1.amazonaws.com/test-nginx'
+        command: buildAndPush
+        Dockerfile: '$(Build.SourcesDirectory)/nginx/Dockerfile'
         tags: |
-          nginx
-    - task: ECRPushImage@1
-      inputs:
-        awsCredentials: 'DonateKartAWS'
-        regionName: 'ap-south-1'
-        imageSource: 'imagename'
-        sourceImageName: 'nginx'
-        repositoryName: '308508746467.dkr.ecr.ap-south-1.amazonaws.com/test-nginx'
+            $(tag)
