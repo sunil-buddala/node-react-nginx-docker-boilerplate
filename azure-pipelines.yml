@@ -24,7 +24,9 @@ stages:
       inputs:
         awsCredentials: 'DonateKartAWS'
         regionName: 'ap-south-1'
-        awsCommand: 'aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin 308508746467.dkr.ecr.ap-south-1.amazonaws.com'
+        awsCommand: 'ecr'
+        awsSubCommand: 'get-login-password'
+        awsArguments: '--region ap-south-1 | docker login --username AWS --password-stdin 308508746467.dkr.ecr.ap-south-1.amazonaws.com'
     - task: Docker@2
       displayName: Build docker image
       inputs:
