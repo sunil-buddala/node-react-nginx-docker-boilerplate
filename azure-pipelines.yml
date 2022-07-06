@@ -10,8 +10,6 @@ resources:
 
 variables:
   tag: '$(Build.BuildId)'
-  name: ECR_REPOSITORY_URL
-  value: $(AWS_ACCOUNT_ID).dkr.ecr.$(AWS_REGION).amazonaws.com/$(ECR_REPOSITORY_NAME)
 
 stages:
 - stage: Build
