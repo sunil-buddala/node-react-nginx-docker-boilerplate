@@ -27,3 +27,10 @@ stages:
         dockerfile: '$(Build.SourcesDirectory)/api/Dockerfile'
         tags: |
           $(tag)
+    - task: ECRPushImage@1
+      inputs:
+        awsCredentials: 'DonateKartAWS'
+        regionName: 'ap-south-1'
+        imageSource: 'imagename'
+        sourceImageName: '$(tag)'
+        repositoryName: '308508746467.dkr.ecr.ap-south-1.amazonaws.com/test-api'
