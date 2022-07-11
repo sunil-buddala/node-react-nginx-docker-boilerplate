@@ -9,7 +9,11 @@ resources:
 - repo: self
 
 variables:
-  tag: '$(Build.BuildId)'
+  - name: tag
+    ${{ if eq(variables['Build.SourceBranch'], 'refs/heads/main') }}:
+      value: production
+    ${{ if ne(variables['Build.SourceBranch'], 'refs/heads/main') }}:
+      value: staging
 
 stages:
 - stage: Build
