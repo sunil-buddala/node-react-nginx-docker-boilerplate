@@ -3,21 +3,21 @@
   "containerDefinitions": [
     {
       "name": "client",
-      "image": "308508746467.dkr.ecr.ap-south-1.amazonaws.com/test-client",
+      "image": "308508746467.dkr.ecr.ap-south-1.amazonaws.com/test-client/staging",
       "hostname": "client",
       "essential": false,
       "memory": 256
     },
     {
       "name": "api",
-      "image": "308508746467.dkr.ecr.ap-south-1.amazonaws.com/test-api",
+      "image": "308508746467.dkr.ecr.ap-south-1.amazonaws.com/test-api/staging",
       "hostname": "api",
       "essential": false,
       "memory": 128
     },
     {
       "name": "nginx",
-      "image": "308508746467.dkr.ecr.ap-south-1.amazonaws.com/test-nginx",
+      "image": "308508746467.dkr.ecr.ap-south-1.amazonaws.com/test-nginx/staging",
       "hostname": "nginx",
       "essential": true,
       "portMappings": [
